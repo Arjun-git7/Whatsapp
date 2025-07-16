@@ -3,8 +3,8 @@ FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
 
 # Copy pom.xml and source files
-COPY pom.xml .
-COPY src ./src
+COPY whatsapp/pom.xml .
+COPY src whatsapp/src
 
 # Build the project (skip tests for faster builds)
 RUN mvn clean package -DskipTests
