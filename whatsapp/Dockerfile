@@ -1,14 +1,23 @@
-# Use OpenJDK image
-FROM openjdk:17-jdk-slim
-
-# Set working directory inside container
+# -------- Stage 1: Build the app --------
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
 
-# Copy jar file (replace with your actual jar name)
-COPY target/whatsapp-0.0.1-SNAPSHOT.jar app.jar
+# Copy pom.xml and source files
+COPY pom.xml .
+COPY src ./src
 
-# Expose the port
-EXPOSE 8081
+# Build the project (skip tests for faster builds)
+RUN mvn clean package -DskipTests
 
-# Run the application
+# -------- Stage 2: Run the app --------
+FROM openjdk:17-jdk-slim
+WORKDIR /app
+
+# Copy the JAR from the build stage
+COPY --from=build /app/target/whatsapp-0.0.1-SNAPSHOT.jar app.jar
+
+# Expose the app port
+EXPOSE 8080
+
+# Run the Spring Boot app
 ENTRYPOINT ["java", "-jar", "app.jar"]
