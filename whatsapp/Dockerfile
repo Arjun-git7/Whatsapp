@@ -4,7 +4,7 @@ WORKDIR /app
 
 # Copy pom.xml and source files
 COPY whatsapp/pom.xml .
-COPY src whatsapp/src
+COPY src ./src
 
 # Build the project (skip tests for faster builds)
 RUN mvn clean package -DskipTests
