@@ -43,14 +43,22 @@ public class ChatroomController {
     @PostMapping
     @ApiOperation("Create a new chatroom")
     public ChatroomResponse createChatroom(@RequestBody CreateChatroomRequest request) {
+        List<User> users = userRepository.findAllById(request.getParticipantIds());
+
+        String chatroomName;
+        if (request.getIsGroup()) {
+            chatroomName = request.getName();
+        } else {
+            chatroomName = users.stream().map(User::getUsername).collect(Collectors.joining("_"));
+        }
+
         Chatroom chatroom = Chatroom.builder()
-                .name(request.getIsGroup() ? request.getName() : null)
+                .name(chatroomName)
                 .isGroup(request.getIsGroup())
                 .build();
 
         Chatroom savedChatroom = chatroomRepository.save(chatroom);
 
-        List<User> users = userRepository.findAllById(request.getParticipantIds());
 
         List<ChatroomParticipant> participants = users.stream()
                 .map(user -> ChatroomParticipant.builder()

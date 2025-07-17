@@ -40,12 +40,15 @@ public class Message {
     @Column(nullable = true)
     private String attachmentType;
 
+    @Builder.Default
     @Column(nullable = false)
     private Boolean isRead = false;
 
+    @Builder.Default
     @Column(nullable = false)
     private Boolean isDelivered = false;
 
+    @Builder.Default
     @Column(name = "is_forwarded")
     private Boolean isForwarded = false;
 

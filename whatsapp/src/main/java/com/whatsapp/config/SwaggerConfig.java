@@ -20,9 +20,9 @@ public class SwaggerConfig {
                         .description("This is a backend implementation of WhatsApp-like messaging system built with Spring Boot.")
                         .version("1.0.0")
                         .contact(new Contact()
-                                .name("Your Name")
-                                .email("your.email@example.com")
-                                .url("https://your-portfolio.com"))
+                                .name("Arjun Kar")
+                                .email("arjunkarpro01@gmail.com")
+                                .url("https://arjun-kar97-portfolio.com"))
                         .license(new License()
                                 .name("Apache 2.0")
                                 .url("http://springdoc.org")));

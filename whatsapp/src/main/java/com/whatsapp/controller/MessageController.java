@@ -53,6 +53,9 @@ public class MessageController {
                 .sender(sender)
                 .chatroom(chatroom)
                 .content(request.getContent())
+                .isDelivered(false)
+                .isRead(false)
+                .timestamp(LocalDateTime.now())
                 .build();
 
         //return toResponse(messageRepository.save(message));

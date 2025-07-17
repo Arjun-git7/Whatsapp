@@ -53,7 +53,10 @@ public class UserController {
         User user = User.builder()
                 .username(request.getUsername())
                 .displayName(request.getDisplayName())
-                .status(request.getStatus())
+                .email(request.getEmail())
+                .password(request.getPassword()) // should be hashed in production
+                .profilePicture(request.getProfilePicture())
+                .status(request.getStatus() != null ? request.getStatus() : "Available")
                 .build();
 
         user = userRepository.save(user);
