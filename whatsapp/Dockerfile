@@ -1,9 +1,9 @@
 # -------- Stage 1: Build the app --------
-FROM maven:3.9.6-eclipse-temurin-17 AS build
+FROM maven:3.9.4-eclipse-temurin-21-alpine AS build
 WORKDIR /whatsapp
 
 # Copy pom.xml and source files
-COPY whatsapp/pom.xml .
+#COPY whatsapp/pom.xml .
 #COPY src/ /whatsapp/src
 COPY . .
 
@@ -11,7 +11,7 @@ COPY . .
 RUN mvn clean package -DskipTests
 
 # -------- Stage 2: Run the app --------
-FROM openjdk:17-jdk-slim
+FROM openjdk:21-jdk-slim
 #FROM eclipse-temurin:17-jdk-alpine
 WORKDIR /whatsapp
 
